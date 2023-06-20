@@ -29,7 +29,7 @@ print(f"key materials: {keyMaterial}")
 with open(f'{keyName}.pem', 'w') as f:
     f.write(keyMaterial)
 os.chmod(f'{keyName}.pem', 0o400)
-
+print("")
 print(".pem file created for RSA")
 
 with open('managerTemplate.yaml', 'r') as file:
@@ -96,7 +96,6 @@ print("Instances created")
 
 print("Waiting for our app to run on instances")
 # Run the app on two instances
-# Our friends bar and niv helped us with this function
 
 keyForRunning = paramiko.RSAKey(filename=f"{keyName}.pem")
 sshForInstances = paramiko.SSHClient()

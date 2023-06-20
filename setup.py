@@ -122,7 +122,6 @@ try:
         other_ip=publicIpOfInstance2, instance_ip=publicIpOfInstance1))
 
     output = stdout.read().decode()
-    print(output)
 except paramiko.AuthenticationException:
     print(f"failed to run on {publicIpOfInstance1}")
 except paramiko.SSHException as e:
@@ -137,7 +136,6 @@ try:
     _, stdout, _ = sshForInstances.exec_command(bash_commands.format(
         other_ip=publicIpOfInstance1, instance_ip=publicIpOfInstance2))
     output = stdout.read().decode()
-    print(output)
 except paramiko.AuthenticationException:
     print(f"failed to run on {publicIpOfInstance2}")
 except paramiko.SSHException as e:

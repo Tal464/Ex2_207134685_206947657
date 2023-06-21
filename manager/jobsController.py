@@ -9,7 +9,6 @@ jobService = jobsService()
 def addJob():
     try:
         currentJob = int((flask.request).args.get('job'))
-        # אצל בר וניב אינקומפליטד גובס
         jobService.notDoneYetJobs.put(currentJob)
         return flask.jsonify({'message': 'Job added'})
     except Exception as e:
@@ -52,14 +51,6 @@ def enqueueToManagerStack():
     except Exception as e:
         # לבדוק אם אפשר למחוק
         return flask.jsonify({'message': 'Error'})
-
-# @control.route('/getLastJobsDone', method=['POST'])
-# def getLastJobsDone():
-#     try:
-#         return
-#     except Exception as e:
-#         return
-
 
 control.route('/worker/addCompletedJob', method=['POST'])
 

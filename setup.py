@@ -1,6 +1,5 @@
 import os
 import uuid
-import requests
 import boto3
 import paramiko
 
@@ -13,7 +12,7 @@ endOfKeyName = str(uuid.uuid4())
 # Start of key name
 keyName = 'cloud-course-ex2-' + endOfKeyName
 print(f"Generates a random UUID {endOfKeyName}")
-print(f"So key and stack name is {keyName}")
+print(f"Key and stack name is {keyName}")
 
 # Create clients
 manager = boto3.client('cloudformation', region_name=region)
@@ -110,7 +109,10 @@ bash_commands = '''
     git clone https://github.com/tal464/Ex2_207134685_206947657.git
     cd Ex2_207134685_206947657/Manager
     sudo chmod 777 app.py
-    sudo pip3 install -r requirements.txt
+    sudo pip3 install Flask
+    sudo pip3 install Werkzeug
+    sudo pip3 install requests
+    sudo pip3 install boto3
     sudo nohup python3 app.py > flask.log 2>&1 &
 '''
 

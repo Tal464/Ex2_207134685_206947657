@@ -66,8 +66,8 @@ class jobsService():
         sudo apt install -y python3
         sudo apt install -y python3-pip
         sudo apt install -y git
-        echo "export EC2IP1={EC2_IP1}" | sudo tee -a /etc/environment
-        echo "export EC2IP2={EC2_IP2}" | sudo tee -a /etc/environment
+        echo "export IpOfFirstEc2={EC2_IP1}" | sudo tee -a /etc/environment
+        echo "export IpOfSecondEc2={EC2_IP2}" | sudo tee -a /etc/environment
         echo "export WORKER_DELTA=6" | sudo tee -a /etc/environment
         source /etc/environment
         git clone https://github.com/Tal464/Ex2_207134685_206947657.git
@@ -75,7 +75,18 @@ class jobsService():
         sudo chmod 777 app.py
         sudo chmod 777 shutDownEc2.sh
         sudo pip3 install boto3
+        sudo pip3 install Flask
+        sudo pip3 install Werkzeug
         sudo pip3 install paramiko
+        sudo pip3 install threading
+        sudo pip3 install uuid
+        sudo pip3 install os
+        sudo pip3 install requests
+        sudo pip3 install datetime
+        sudo pip3 install queue
+        sudo pip3 install time
+        sudo pip3 install subprocess
+        sudo pip3 install hashlib
         sudo python3 app.py
         ''',
         )

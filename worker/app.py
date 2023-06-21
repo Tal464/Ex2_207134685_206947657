@@ -13,6 +13,7 @@ def provideJobs():
 
     while True:
         if numberOfJobRequests > 7:
+            print("too many requests - shutting down")
             os.chmod("./shutDownEc2.sh", 0o111)
             subprocess.run(['bash', './shutDownEc2.sh'])
         time.sleep(timeToWait)
@@ -27,13 +28,13 @@ def provideJobs():
             notWorkingManager = ec2Ip1
         try:
             jobDone = requests.get(
-                f'http://{workingManager}:5000/worker/job', timeout=8).json()
+                f'http://{workingManager}:5000/worker/getNextJob', timeout=8).json()
         except Exception as e:
             continue
         if jobDone != None:
             result = work(jobDone["data"], jobDone["iterations"])
             jobDone["data"] = str(result)
-            # לא עשינו סנדינג פיניש
+            print("Did the job")
             numberOfJobRequests = 0
 
 # getting queue length to decide
@@ -42,7 +43,7 @@ def provideJobs():
 def tryGettingQueueLength(ip):
     try:
         length = requests.get(
-            f"http://{ip}:5000/length", timeout=3).json()
+            f"http://{ip}:5000/getLengthOfNotDoneYetJobs", timeout=3).json()
     except Exception as e:
         length = 0
     return length
@@ -55,8 +56,6 @@ def work(data, iterations):
     for i in range(iterations - 1):
         output = hashlib.sha512(output).digest()
     return str(output)
-
-# לא עשינו להודיע למנג'ר
 
 
 if __name__ == '__main__':
